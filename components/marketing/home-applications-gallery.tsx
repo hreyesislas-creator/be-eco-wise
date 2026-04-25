@@ -1,5 +1,9 @@
 "use client";
 
+import {
+  PremiumPhotoLayers,
+  premiumPhotoFilter,
+} from "@/components/marketing/premium-photo-layers";
 import { localApplicationSlides } from "@/constants/local-marketing-images";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
@@ -52,7 +56,7 @@ export function HomeApplicationsGallery() {
           onMouseLeave={() => setPaused(false)}
         >
           <div
-            className="relative mx-auto aspect-[16/10] max-h-[min(70vh,36rem)] w-full max-w-5xl overflow-hidden rounded-2xl border border-white/12 bg-[#0a1210] shadow-[0_32px_80px_-28px_rgba(0,0,0,0.75)]"
+            className="group/gallery relative mx-auto aspect-[16/10] max-h-[min(70vh,36rem)] w-full max-w-5xl overflow-hidden rounded-3xl border border-white/12 bg-[#0a1210] shadow-[0_10px_30px_rgba(0,0,0,0.15),0_32px_80px_-28px_rgba(0,0,0,0.55)]"
             role="region"
             aria-roledescription="carousel"
             aria-label="Application photography"
@@ -68,33 +72,41 @@ export function HomeApplicationsGallery() {
                 }}
                 aria-hidden={i !== index}
               >
-                <div className="absolute inset-0">
+                <div className="absolute inset-0 overflow-hidden">
                   {!failed[slide.id] ? (
-                    <Image
-                      src={slide.src}
-                      alt={slide.alt}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 64rem"
-                      className="object-cover"
-                      priority={i === 0}
-                      onError={() => markFailed(slide.id)}
-                    />
+                    <div className="absolute inset-0 transition-transform duration-300 ease-out group-hover/gallery:scale-[1.03]">
+                      <Image
+                        src={slide.src}
+                        alt={slide.alt}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 64rem"
+                        className="object-cover"
+                        style={{
+                          filter: premiumPhotoFilter,
+                          WebkitFilter: premiumPhotoFilter,
+                        }}
+                        priority={i === 0}
+                        onError={() => markFailed(slide.id)}
+                      />
+                    </div>
                   ) : (
                     <div
-                      className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#141f1c] via-[#0c1412] to-[#050807]"
+                      className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-[#141f1c] via-[#0c1412] to-[#050807]"
                       aria-hidden
                     >
                       <span className="text-center text-[10px] font-medium uppercase tracking-[0.2em] text-white/22">
                         Image unavailable
                       </span>
+                      <PremiumPhotoLayers />
                     </div>
                   )}
+                  {!failed[slide.id] ? <PremiumPhotoLayers /> : null}
                 </div>
                 <div
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050807]/92 via-transparent to-[#050807]/25"
+                  className="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-t from-[#050807]/92 via-transparent to-[#050807]/25"
                   aria-hidden
                 />
-                <p className="absolute inset-x-0 bottom-0 z-10 px-6 pb-6 pt-20 text-lg font-medium tracking-tight text-white sm:text-xl">
+                <p className="absolute inset-x-0 bottom-0 z-[4] px-6 pb-6 pt-20 text-lg font-medium tracking-tight text-white sm:text-xl">
                   {slide.caption}
                 </p>
               </div>

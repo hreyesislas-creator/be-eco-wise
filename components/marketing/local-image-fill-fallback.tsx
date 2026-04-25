@@ -1,5 +1,9 @@
 "use client";
 
+import {
+  PremiumPhotoLayers,
+  premiumPhotoFilter,
+} from "@/components/marketing/premium-photo-layers";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -12,10 +16,12 @@ type Props = {
   className?: string;
   sizes: string;
   priority?: boolean;
+  /** Subtle zoom on hover (Standards cards only). Parent should use `group/card`. */
+  cardHover?: boolean;
 };
 
 /**
- * `fill` image with a calm dark gradient if the file is missing or fails to load.
+ * `fill` image with premium overlays + calm dark fallback if the file fails.
  * Parent must be `position: relative` with bounded size.
  */
 export function LocalImageFillWithFallback({
@@ -24,28 +30,47 @@ export function LocalImageFillWithFallback({
   className = "object-cover",
   sizes,
   priority,
+  cardHover = false,
 }: Props) {
   const [failed, setFailed] = useState(false);
 
-  if (failed) {
-    return (
-      <div
-        className={placeholderClass}
-        aria-hidden={alt === ""}
-        {...(alt ? { role: "img" as const, "aria-label": alt } : {})}
-      />
-    );
-  }
+  const scaleClass = cardHover
+    ? "transition-transform duration-300 ease-out group-hover/card:scale-[1.03]"
+    : "";
+
+  const filterStyle = {
+    filter: premiumPhotoFilter,
+    WebkitFilter: premiumPhotoFilter,
+  } as const;
 
   return (
-    <Image
-      src={src}
-      alt={alt}
-      fill
-      className={className}
-      sizes={sizes}
-      priority={priority}
-      onError={() => setFailed(true)}
-    />
+    <div className="absolute inset-0 overflow-hidden">
+      {failed ? (
+        <>
+          <div
+            className={placeholderClass}
+            aria-hidden={alt === ""}
+            {...(alt ? { role: "img" as const, "aria-label": alt } : {})}
+          />
+          <PremiumPhotoLayers />
+        </>
+      ) : (
+        <>
+          <div className={`absolute inset-0 ${scaleClass}`}>
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              className={className}
+              sizes={sizes}
+              priority={priority}
+              style={filterStyle}
+              onError={() => setFailed(true)}
+            />
+          </div>
+          <PremiumPhotoLayers />
+        </>
+      )}
+    </div>
   );
 }

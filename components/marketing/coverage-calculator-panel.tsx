@@ -88,6 +88,9 @@ export function CoverageCalculatorPanel({
           Ballpark material + labor from your square footage and depth. Final
           pricing depends on site conditions — we&apos;ll confirm on walkthrough.
         </p>
+        <p className="mt-1.5 text-xs font-light leading-relaxed text-white/45">
+          See your estimated cost before we ever step on site.
+        </p>
 
         <div className="mt-6 space-y-5">
           <div>

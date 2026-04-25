@@ -46,12 +46,13 @@ export function HomeTrustSection() {
         <div className="mt-20 grid gap-16 sm:grid-cols-3 sm:gap-10">
           {items.map((item) => (
             <div key={item.title} className="text-center sm:text-left">
-              <div className="relative mx-auto aspect-[5/3] max-w-sm overflow-hidden sm:mx-0 sm:max-w-none">
+              <div className="group/card relative mx-auto aspect-[5/3] max-w-sm overflow-hidden rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.15)] sm:mx-0 sm:max-w-none">
                 <LocalImageFillWithFallback
                   src={item.src}
                   alt={item.alt}
                   className="object-cover"
                   sizes="(max-width: 640px) 100vw, 33vw"
+                  cardHover
                 />
               </div>
               <h3 className="mt-8 text-lg font-medium tracking-tight text-[var(--color-ink)]">
@@ -146,7 +147,7 @@ export function HomeWhySection() {
     <section className="bg-[var(--home-warm-paper)]">
       <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6 sm:py-32">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-24">
-          <div className="relative aspect-[4/5] max-h-[520px] w-full overflow-hidden lg:max-h-none">
+          <div className="relative aspect-[4/5] max-h-[520px] w-full overflow-hidden rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.15)] lg:max-h-none">
             <LocalImageFillWithFallback
               src={homeWhyImage}
               alt="Finished rubber mulch installation"
