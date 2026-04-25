@@ -77,8 +77,7 @@ export function SiteFooter() {
         <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Be Eco Wise. All rights reserved.</p>
           <p className="max-w-prose sm:text-right">
-            Marketing imagery on this preview may load from becowise.com
-            temporarily for design approval — final assets will be hosted locally.
+            Site photography is served from local assets for reliable loading.
           </p>
         </div>
       </div>

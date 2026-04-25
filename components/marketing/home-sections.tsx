@@ -1,5 +1,9 @@
-import { tempBecowiseImages } from "@/constants/temp-becowise-images";
-import Image from "next/image";
+import { LocalImageFillWithFallback } from "@/components/marketing/local-image-fill-fallback";
+import {
+  homeCtaBackgroundImage,
+  homeStandardsImages,
+  homeWhyImage,
+} from "@/constants/local-marketing-images";
 import Link from "next/link";
 
 export { HomeHeroSection } from "@/components/marketing/home-hero";
@@ -7,19 +11,19 @@ export { HomeHeroSection } from "@/components/marketing/home-hero";
 export function HomeTrustSection() {
   const items = [
     {
-      src: tempBecowiseImages.trustRecycling,
+      src: homeStandardsImages.responsibleSourcing,
       alt: "Responsible tire recycling and processing",
       title: "Responsible sourcing",
       body: "Wire-free, recycling-forward material — built for years outside, not seasonal mulch churn.",
     },
     {
-      src: tempBecowiseImages.trustWireFree,
+      src: homeStandardsImages.specificationGrade,
       alt: "Wire-free rubber processing",
       title: "Specification-grade product",
       body: "Clean granules for play, pets, and public scrutiny — we install what we'd stake our name on.",
     },
     {
-      src: tempBecowiseImages.trustPlayground,
+      src: homeStandardsImages.fieldExecution,
       alt: "Playground safety surfacing",
       title: "Field execution",
       body: "Depth, borders, and drainage planned for real traffic — not a rushed top-dress.",
@@ -43,10 +47,9 @@ export function HomeTrustSection() {
           {items.map((item) => (
             <div key={item.title} className="text-center sm:text-left">
               <div className="relative mx-auto aspect-[5/3] max-w-sm overflow-hidden sm:mx-0 sm:max-w-none">
-                <Image
+                <LocalImageFillWithFallback
                   src={item.src}
                   alt={item.alt}
-                  fill
                   className="object-cover"
                   sizes="(max-width: 640px) 100vw, 33vw"
                 />
@@ -144,10 +147,9 @@ export function HomeWhySection() {
       <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6 sm:py-32">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-24">
           <div className="relative aspect-[4/5] max-h-[520px] w-full overflow-hidden lg:max-h-none">
-            <Image
-              src={tempBecowiseImages.heroSecondary}
+            <LocalImageFillWithFallback
+              src={homeWhyImage}
               alt="Finished rubber mulch installation"
-              fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
@@ -249,10 +251,9 @@ export function HomeEstimateCtaSection() {
   return (
     <section className="relative overflow-hidden border-t border-white/5 bg-[var(--home-charcoal)]">
       <div className="absolute inset-0 opacity-30">
-        <Image
-          src={tempBecowiseImages.ctaTexture}
+        <LocalImageFillWithFallback
+          src={homeCtaBackgroundImage}
           alt=""
-          fill
           className="object-cover object-center"
           sizes="100vw"
         />

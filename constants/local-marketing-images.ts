@@ -6,6 +6,19 @@ export const localMarketingImages = {
   logo: "/images/be-eco-wise-logo.png",
 } as const;
 
+/** Homepage “Standards” cards — local application photography only. */
+export const homeStandardsImages = {
+  responsibleSourcing: "/images/application-material-closeup.webp",
+  specificationGrade: "/images/application-school-park.webp",
+  fieldExecution: "/images/application-playground.webp",
+} as const;
+
+/** Homepage “Why Be Eco Wise” feature image. */
+export const homeWhyImage = "/images/application-residential.webp";
+
+/** Homepage estimate CTA background (full-bleed texture). */
+export const homeCtaBackgroundImage = "/images/application-hoa.webp";
+
 export const localApplicationSlides = [
   {
     id: "playground",
